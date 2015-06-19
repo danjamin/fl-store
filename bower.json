@@ -1,0 +1,34 @@
+{
+  "name": "fl-store",
+  "version": "0.1.0",
+  "authors": [
+    "danjamin <e051ba3be@gmail.com>"
+  ],
+  "homepage": "https://github.com/danjamin/fl-store",
+  "description": "re-usable store for fluxlike applications",
+  "main": "index.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "flux",
+    "react",
+    "store",
+    "events"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "devDependencies": {
+    "underscore": "~1.8.3"
+  }
+}
