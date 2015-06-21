@@ -109,16 +109,16 @@
   };
 
   if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
-		// AMD. Register as an anonymous module.
-		define(function () {
-			return Store;
-		});
-	} else if (typeof module !== 'undefined' && module.exports) {
-		module.exports = Store;
-	} else {
+    // AMD. Register as an anonymous module.
+    define(function () {
+      return Store;
+    });
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Store;
+  } else {
     if (typeof window.fl === 'undefined') {
       window.fl = {};
     }
     window.fl.Store = Store;
-	}
+  }
 })();
