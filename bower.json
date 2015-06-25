@@ -6,11 +6,12 @@
   ],
   "homepage": "https://github.com/danjamin/fl-store",
   "description": "re-usable store for fluxlike applications",
-  "main": "index.js",
+  "main": "dist/fl-store.js",
   "moduleType": [
     "amd",
     "globals",
-    "node"
+    "node",
+    "es6"
   ],
   "keywords": [
     "flux",
@@ -25,7 +26,9 @@
     "bower_components",
     "test",
     "tests",
+    "Brocfile.js",
     "karma.conf.js",
+    "system.conf.js",
     "package.json"
   ],
   "devDependencies": {
