@@ -10,14 +10,23 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['systemjs', 'mocha'],
 
+    systemjs: {
+      configFile: 'system.conf.js',
 
-    // list of files / patterns to load in the browser
+      files: [
+        'lib/**/*.js',
+        'test/**/*.spec.js',
+
+        'bower_components/underscore/underscore.js'
+      ],
+
+      testFileSuffix: '.spec.js'
+    },
+
     files: [
-      'bower_components/underscore/underscore.js',
-      'index.js',
-      'test/index.spec.js'
+      'node_modules/expect.js/index.js'
     ],
 
 
@@ -35,7 +44,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['dots'],
 
 
     // web server port
@@ -57,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
