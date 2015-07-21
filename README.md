@@ -124,4 +124,4 @@ update bower.json and package.json versions tag semver and push to origin
 - [ ] clean up code
 - [ ] Add more unit tests
 - [ ] Bring in flow
-- [ ] Setup travis CI
+- [x] Setup travis CI
