@@ -21,6 +21,74 @@ OR via [npm](http://npmjs.com):
 $ npm install --save https://github.com/danjamin/fl-store.git#0.1.1
 ```
 
+### example
+
+Create a store:
+
+```js
+// MyStore.js
+
+import _ from 'underscore';
+
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import {Store} from 'fl-store';
+
+// Note: if using common JS you might have:
+// var Store = require('fl-store').Store;
+
+var MyStore = _.extend({}, Store, {
+  // ...
+});
+
+MyStore.dispatchToken = AppDispatcher.register(function (action) {
+  switch (action.type) {
+    case 'SOMETHING':
+      // respond to this action here ...
+
+      // then emit change to everyone listening:
+      MyStore.emitChange();
+      break;
+
+    default:
+      // do nothing
+  }
+});
+
+export default MyStore;
+```
+
+Register a view to your store:
+
+```js
+// MyView.js
+
+import React from 'react';
+import MyStore from '../stores/MyStore.js';
+
+export default React.createClass({
+  // ...
+
+  componentWillMount: function () {
+    // add change listener to MyStore when component will mount
+    MyStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    // remove change listener from MyStore after component unmounted
+    MyStore.removeChangeListener(this._onChange);
+  },
+
+  render: function () {
+    // ...
+  },
+
+  // ...
+
+  _onChange: function () {
+    // ...
+  }
+});
+```
 
 ## DEVELOP
 
@@ -45,7 +113,9 @@ $ npm test
 
 ### building
 
+```sh
 $ npm run build
+```
 
 update bower.json and package.json versions tag semver and push to origin
 
