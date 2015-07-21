@@ -1,4 +1,4 @@
-# fl-store [![Build Status](https://travis-ci.org/danjamin/fl-store.svg?branch=0.1.1)](https://travis-ci.org/danjamin/fl-store)
+# fl-store [![Build Status](https://travis-ci.org/danjamin/fl-store.svg)](https://travis-ci.org/danjamin/fl-store)
 
 re-usable store for fluxlike applications
 
