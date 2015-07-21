@@ -89,7 +89,7 @@
 
   var CHANGE_EVENT = 'change';
 
-  var main = {
+  var Store = {
     emitChange: function () {
       // returns the number of invocations
       return emit.call(this, CHANGE_EVENT);
@@ -106,6 +106,6 @@
     }
   };
 
-  exports['default'] = main;
+  exports.Store = Store;
 
 }));
