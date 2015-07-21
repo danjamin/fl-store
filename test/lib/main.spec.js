@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 
 import _ from 'underscore';
-import Store from 'lib/main.js';
+import {Store} from 'lib/main.js';
 
 describe("fl-store", function () {
 
