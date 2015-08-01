@@ -1,111 +1,105 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  factory((global.FLStore = {}))
-}(this, function (exports) { 'use strict';
+'use strict';
 
-  // Checks for existence of callbacks by name on this
-  // particular Store.
-  function callbacksExistByName(eventName) {
-    return (typeof this._callbacks !== 'undefined' && this._callbacks.hasOwnProperty(eventName));
+// Checks for existence of callbacks by name on this
+// particular Store.
+function callbacksExistByName(eventName) {
+  return (typeof this._callbacks !== 'undefined' && this._callbacks.hasOwnProperty(eventName));
+}
+
+// "this" is the particular Store in question
+// returns boolean -- true if callback added, else false
+function on(eventName, callback) {
+  var callbacks,
+    index;
+
+  // set the callbacks on this Store if not already present
+  if (typeof this._callbacks === 'undefined') {
+    this._callbacks = {};
   }
 
-  // "this" is the particular Store in question
-  // returns boolean -- true if callback added, else false
-  function on(eventName, callback) {
-    var callbacks,
-      index;
-
-    // set the callbacks on this Store if not already present
-    if (typeof this._callbacks === 'undefined') {
-      this._callbacks = {};
-    }
-
-    // set the particular set of events by name (if not already present)
-    if (!this._callbacks.hasOwnProperty(eventName)) {
-      this._callbacks[eventName] = [];
-    }
-
-    callbacks = this._callbacks[eventName];
-
-    // find index of callback
-    index = callbacks.indexOf(callback);
-
-    // if callback not present, then add it
-    if (index === -1) {
-      callbacks.push(callback);
-      return true;
-    }
-
-    return false;
+  // set the particular set of events by name (if not already present)
+  if (!this._callbacks.hasOwnProperty(eventName)) {
+    this._callbacks[eventName] = [];
   }
 
-  // "this" is the particular Store in question
-  // returns number, the number of callbacks invoked
-  function emit(eventName) {
-    var callbacks,
-      numInvocations = 0;
+  callbacks = this._callbacks[eventName];
 
-    // get out if no callbacks exist
-    if (!callbacksExistByName.call(this, eventName)) {
-      return numInvocations;
-    }
+  // find index of callback
+  index = callbacks.indexOf(callback);
 
-    callbacks = this._callbacks[eventName];
+  // if callback not present, then add it
+  if (index === -1) {
+    callbacks.push(callback);
+    return true;
+  }
 
-    // invoke each callback by this name
-    callbacks.forEach(function (callback) {
-      callback();
-      ++numInvocations;
-    });
+  return false;
+}
 
+// "this" is the particular Store in question
+// returns number, the number of callbacks invoked
+function emit(eventName) {
+  var callbacks,
+    numInvocations = 0;
+
+  // get out if no callbacks exist
+  if (!callbacksExistByName.call(this, eventName)) {
     return numInvocations;
   }
 
-  // "this" is the particular Store in question
-  // returns boolean of whether or not callback was removed
-  function removeChangeListener(eventName, callback) {
-    var callbacks,
-      index;
+  callbacks = this._callbacks[eventName];
 
-    // get out if no callbacks exist
-    if (!callbacksExistByName.call(this, eventName)) {
-      return false;
-    }
+  // invoke each callback by this name
+  callbacks.forEach(function (callback) {
+    callback();
+    ++numInvocations;
+  });
 
-    callbacks = this._callbacks[eventName];
+  return numInvocations;
+}
 
-    // find index of callback
-    index = callbacks.indexOf(callback);
+// "this" is the particular Store in question
+// returns boolean of whether or not callback was removed
+function removeChangeListener(eventName, callback) {
+  var callbacks,
+    index;
 
-    // if found, remove it
-    if (index > -1) {
-      callbacks.splice(index, 1);
-      return true;
-    }
-
+  // get out if no callbacks exist
+  if (!callbacksExistByName.call(this, eventName)) {
     return false;
   }
 
-  var CHANGE_EVENT = 'change';
+  callbacks = this._callbacks[eventName];
 
-  var Store = {
-    emitChange: function () {
-      // returns the number of invocations
-      return emit.call(this, CHANGE_EVENT);
-    },
+  // find index of callback
+  index = callbacks.indexOf(callback);
 
-    addChangeListener: function (callback) {
-      // return boolean, true if added, else false
-      return on.call(this, CHANGE_EVENT, callback);
-    },
+  // if found, remove it
+  if (index > -1) {
+    callbacks.splice(index, 1);
+    return true;
+  }
 
-    removeChangeListener: function (callback) {
-      // returns boolean, true if removed, else false
-      return removeChangeListener.call(this, CHANGE_EVENT, callback);
-    }
-  };
+  return false;
+}
 
-  exports.Store = Store;
+var CHANGE_EVENT = 'change';
 
-}));
+var Store = {
+  emitChange: function () {
+    // returns the number of invocations
+    return emit.call(this, CHANGE_EVENT);
+  },
+
+  addChangeListener: function (callback) {
+    // return boolean, true if added, else false
+    return on.call(this, CHANGE_EVENT, callback);
+  },
+
+  removeChangeListener: function (callback) {
+    // returns boolean, true if removed, else false
+    return removeChangeListener.call(this, CHANGE_EVENT, callback);
+  }
+};
+
+exports.Store = Store;

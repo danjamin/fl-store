@@ -10,7 +10,7 @@ Note: this is still in development and not registered to **npm** yet.
       So keep this in mind and install via the Git URL for now.
 
 ```sh
-$ npm install --save https://github.com/danjamin/fl-store.git#0.1.2
+$ npm install --save https://github.com/danjamin/fl-store.git#0.2.0
 ```
 
 ### example
