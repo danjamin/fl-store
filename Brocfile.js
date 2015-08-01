@@ -1,32 +1,17 @@
-var ES6Modules = require('broccoli-es6modules'),
-  Funnel = require('broccoli-funnel');
-
-var moduleName = 'FLStore',
-  fileName = 'fl-store';
+var ES6Modules = require('broccoli-es6modules');
 
 var tree = 'lib';
 
 tree = new ES6Modules(tree, {
-  format: 'umd',
+  format: 'cjs',
   bundleOptions: {
     entry: 'main.js',
-    name: moduleName
+    name: 'fl-store'
   },
   esperantoOptions: {
     strict: true
   }
 });
 
-tree = new Funnel(tree, {
-  destDir: '',
-
-  getDestinationPath: function(relativePath) {
-    if (relativePath === moduleName + '.js') {
-      return fileName + '.js';
-    }
-
-    return relativePath;
-  }
-});
-
 module.exports = tree;
+

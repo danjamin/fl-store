@@ -6,16 +6,8 @@ re-usable store for fluxlike applications
 
 ### install
 
-Note: this is still in development and not registered to **npm** or **bower** yet.
+Note: this is still in development and not registered to **npm** yet.
       So keep this in mind and install via the Git URL for now.
-
-via [bower](http://bower.io):
-
-```sh
-$ bower install --save https://github.com/danjamin/fl-store.git#0.1.2
-```
-
-OR via [npm](http://npmjs.com):
 
 ```sh
 $ npm install --save https://github.com/danjamin/fl-store.git#0.1.2
@@ -28,7 +20,7 @@ Create a store:
 ```js
 // MyStore.js
 
-import _ from 'underscore';
+import objectAssign from 'object-assign';
 
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {Store} from 'fl-store';
@@ -36,7 +28,7 @@ import {Store} from 'fl-store';
 // Note: if using common JS you might have:
 // var Store = require('fl-store').Store;
 
-var MyStore = _.extend({}, Store, {
+var MyStore = objectAssign({}, Store, {
   // ...
 });
 
@@ -95,8 +87,11 @@ export default React.createClass({
 ### install dependencies
 
 ```sh
+$ npm install -g jshint mocha babel broccoli-cli
+```
+
+```sh
 $ npm install
-$ bower install
 ```
 
 ### linting
@@ -111,17 +106,29 @@ $ npm run lint
 $ npm test
 ```
 
+### ongoing testing
+
+```sh
+$ ./scripts/transpile watch
+```
+
+then in a separate shell (each time):
+
+```sh
+$ ./scripts/test
+```
+
+optionally you can filter the tests:
+
+```sh
+$ ./scripts/test fl-store
+```
+
 ### building
 
 ```sh
 $ npm run build
 ```
 
-update bower.json and package.json versions tag semver and push to origin
+update package.json version, tag semver, and push to origin
 
-### todo
-
-- [ ] clean up code
-- [ ] Add more unit tests
-- [ ] Bring in flow
-- [x] Setup travis CI
