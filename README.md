@@ -28,8 +28,22 @@ import {Store} from 'fl-store';
 // Note: if using common JS you might have:
 // var Store = require('fl-store').Store;
 
+var _data = {};
+
 var MyStore = objectAssign({}, Store, {
   // ...
+
+  serialize: function () {
+    return JSON.stringify({ data: _data });
+  },
+
+  deserialize: function (serializedData) {
+    var deserialized = JSON.parse(serializedData);
+
+    if (deserialized.hasOwnProperty('data')) {
+      _data = deserialized.data;
+    }
+  }
 });
 
 MyStore.dispatchToken = AppDispatcher.register(function (action) {
