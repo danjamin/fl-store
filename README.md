@@ -1,3 +1,5 @@
+# NOT MAINTAINED
+
 # fl-store [![Build Status](https://travis-ci.org/danjamin/fl-store.svg)](https://travis-ci.org/danjamin/fl-store)
 
 re-usable store for fluxlike applications
